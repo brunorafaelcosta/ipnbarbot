@@ -21,6 +21,11 @@
     <PackageReference Include="Magick.NET-Q8-x64" Version="7.14.0" />
     <PackageReference Include="Tesseract-test" Version="4.0.0-beta16" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.16" />
+
+    <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.5.1" />
+    <PackageReference Include="Microsoft.Bot.Builder.AI.Luis" Version="4.5.1" />
+    <PackageReference Include="Microsoft.Bot.Builder.Dialogs" Version="4.5.1" />
+    <PackageReference Include="Microsoft.Recognizers.Text.DataTypes.TimexExpression" Version="1.1.5" />
   </ItemGroup>
 
   <ItemGroup>
