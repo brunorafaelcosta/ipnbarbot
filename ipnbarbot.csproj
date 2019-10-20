@@ -17,12 +17,22 @@
     <PackageReference Include="Serilog.Settings.Configuration" Version="3.0.1" />
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="4.0.0" />
+  
+    <PackageReference Include="Magick.NET-Q8-x64" Version="7.14.0" />
+    <PackageReference Include="Tesseract-test" Version="4.0.0-beta16" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.16" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+      <None Update="tessdata/*">
+          <CopyToOutputDirectory>ACTION_TYPE</CopyToOutputDirectory>
+      </None>
   </ItemGroup>
 
 </Project>

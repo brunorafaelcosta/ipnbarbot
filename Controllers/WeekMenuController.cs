@@ -130,6 +130,34 @@ namespace ipnbarbot.Controllers
             }
         }
 
+        [Route("scan")]
+        [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public async Task<IActionResult> Scan(string token)
+        {
+            try
+            {
+                if (token != this._configuration.GetValue<string>(TokenKeyname))
+                {
+                    this._logger.LogWarning($"Tried to access the method {(nameof(WeekMenuController.Scan))} with an invalid token [Token: '{token}'].");
+                    return BadRequest();
+                }
+
+                string facebookPageName = this._configuration.GetValue<string>("FacebookPageName");
+                byte[] menuImage = await Application.Helpers.FacebookHelpers.GetLastPostImage(facebookPageName, this._logger);
+                string menuText = await Application.Helpers.OcrHelpers.ReadTextFromImageAsync(menuImage, _configuration.GetSection("Ocr"), this._logger);
+
+                return await this.Post(token, ViewModels.DailyMenuViewModelExtensions.GetFromText(menuText));
+            }
+            catch (Exception ex)
+            {
+                this._logger.LogError(ex, ex.Message);
+                return BadRequest("Failed scanning for new facebook posts!");
+            }
+        }
+
         [Route("removeforweek")]
         [HttpGet]
         [ProducesResponseType((int)HttpStatusCode.OK)]
