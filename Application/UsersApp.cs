@@ -68,5 +68,10 @@ namespace ipnbarbot.Application
             
             return user;
         }
+
+        public async Task<bool> ChannelAccountIdIsRegistered(string id)
+        {
+            return await this._dbContext.Users.AnyAsync(u => u.ChannelAccountId == id);
+        }
     }
 }

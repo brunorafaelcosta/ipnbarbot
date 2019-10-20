@@ -11,5 +11,7 @@ namespace ipnbarbot.Application
         Task<IEnumerable<Models.User>> GetAll();
 
         Task<Models.User> GetByChannelAccountId(string id);
+
+        Task<bool> ChannelAccountIdIsRegistered(string id);
     }
 }

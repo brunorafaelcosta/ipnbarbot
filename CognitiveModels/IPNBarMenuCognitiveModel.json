@@ -1,0 +1,307 @@
+{
+  "luis_schema_version": "5.0.0",
+  "versionId": "0.1",
+  "name": "ipnbarbot",
+  "desc": "",
+  "culture": "pt-br",
+  "tokenizerVersion": "1.0.0",
+  "intents": [
+    {
+      "name": "MenuDiario"
+    },
+    {
+      "name": "MenuSemanal"
+    },
+    {
+      "name": "None"
+    }
+  ],
+  "entities": [],
+  "composites": [],
+  "closedLists": [
+    {
+      "name": "MenuDate",
+      "subLists": [
+        {
+          "canonicalForm": "hoje",
+          "list": [
+            "agora",
+            "dia",
+            "meio dia",
+            "meio-dia",
+            "meidia"
+          ]
+        },
+        {
+          "canonicalForm": "amanhã",
+          "list": [
+            "amanha"
+          ]
+        },
+        {
+          "canonicalForm": "segunda-feira",
+          "list": [
+            "segunda feira",
+            "segunda"
+          ]
+        },
+        {
+          "canonicalForm": "terça-feira",
+          "list": [
+            "terça feira",
+            "terca",
+            "terça"
+          ]
+        },
+        {
+          "canonicalForm": "quarta-feira",
+          "list": [
+            "quarta feira",
+            "quarta"
+          ]
+        },
+        {
+          "canonicalForm": "quinta-feira",
+          "list": [
+            "quinta feira",
+            "quinta"
+          ]
+        },
+        {
+          "canonicalForm": "sexta-feira",
+          "list": [
+            "sexta feira",
+            "sexta"
+          ]
+        },
+        {
+          "canonicalForm": "semana",
+          "list": [
+            "semanal",
+            "toda"
+          ]
+        }
+      ],
+      "roles": []
+    },
+    {
+      "name": "MenuType",
+      "subLists": [
+        {
+          "canonicalForm": "menu",
+          "list": []
+        },
+        {
+          "canonicalForm": "bucha",
+          "list": []
+        },
+        {
+          "canonicalForm": "sugestao",
+          "list": [
+            "sugestão",
+            "sugestões",
+            "suguestoes"
+          ]
+        },
+        {
+          "canonicalForm": "prato",
+          "list": []
+        },
+        {
+          "canonicalForm": "ementa",
+          "list": []
+        }
+      ],
+      "roles": []
+    }
+  ],
+  "patternAnyEntities": [],
+  "regex_entities": [],
+  "prebuiltEntities": [],
+  "model_features": [],
+  "regex_features": [],
+  "patterns": [],
+  "utterances": [
+    {
+      "text": "bucha da semana",
+      "intent": "MenuSemanal",
+      "entities": []
+    },
+    {
+      "text": "bucha para amanha",
+      "intent": "MenuDiario",
+      "entities": []
+    },
+    {
+      "text": "bucha pra amanha",
+      "intent": "MenuDiario",
+      "entities": []
+    },
+    {
+      "text": "bucha pra hoje",
+      "intent": "MenuDiario",
+      "entities": []
+    },
+    {
+      "text": "bucha semanal",
+      "intent": "MenuSemanal",
+      "entities": []
+    },
+    {
+      "text": "diz-me a ementa da semana",
+      "intent": "MenuSemanal",
+      "entities": []
+    },
+    {
+      "text": "diz-me a ementa semanal",
+      "intent": "MenuSemanal",
+      "entities": []
+    },
+    {
+      "text": "diz-me o menu da semana",
+      "intent": "MenuSemanal",
+      "entities": []
+    },
+    {
+      "text": "diz-me o menu para a semana",
+      "intent": "MenuSemanal",
+      "entities": []
+    },
+    {
+      "text": "ementa da semana",
+      "intent": "MenuSemanal",
+      "entities": []
+    },
+    {
+      "text": "ementa semanal",
+      "intent": "MenuSemanal",
+      "entities": []
+    },
+    {
+      "text": "menu da semana",
+      "intent": "MenuSemanal",
+      "entities": []
+    },
+    {
+      "text": "menu de amanha",
+      "intent": "MenuDiario",
+      "entities": []
+    },
+    {
+      "text": "menu de amanhã",
+      "intent": "MenuDiario",
+      "entities": []
+    },
+    {
+      "text": "menu de hoje",
+      "intent": "MenuDiario",
+      "entities": []
+    },
+    {
+      "text": "menu de quarta",
+      "intent": "MenuDiario",
+      "entities": []
+    },
+    {
+      "text": "menu de quarta feira",
+      "intent": "MenuDiario",
+      "entities": []
+    },
+    {
+      "text": "menu de quarta-feira",
+      "intent": "MenuDiario",
+      "entities": []
+    },
+    {
+      "text": "menu de quinta",
+      "intent": "MenuDiario",
+      "entities": []
+    },
+    {
+      "text": "menu de quinta feira",
+      "intent": "MenuDiario",
+      "entities": []
+    },
+    {
+      "text": "menu de quinta-feira",
+      "intent": "MenuDiario",
+      "entities": []
+    },
+    {
+      "text": "menu de segunda",
+      "intent": "MenuDiario",
+      "entities": []
+    },
+    {
+      "text": "menu de segunda feira",
+      "intent": "MenuDiario",
+      "entities": []
+    },
+    {
+      "text": "menu de segunda-feira",
+      "intent": "MenuDiario",
+      "entities": []
+    },
+    {
+      "text": "menu de sexta",
+      "intent": "MenuDiario",
+      "entities": []
+    },
+    {
+      "text": "menu de sexta feira",
+      "intent": "MenuDiario",
+      "entities": []
+    },
+    {
+      "text": "menu de sexta-feira",
+      "intent": "MenuDiario",
+      "entities": []
+    },
+    {
+      "text": "menu de terça",
+      "intent": "MenuDiario",
+      "entities": []
+    },
+    {
+      "text": "menu de terça feira",
+      "intent": "MenuDiario",
+      "entities": []
+    },
+    {
+      "text": "menu de terça-feira",
+      "intent": "MenuDiario",
+      "entities": []
+    },
+    {
+      "text": "menu quarta",
+      "intent": "MenuDiario",
+      "entities": []
+    },
+    {
+      "text": "menu quinta",
+      "intent": "MenuDiario",
+      "entities": []
+    },
+    {
+      "text": "menu segunda",
+      "intent": "MenuDiario",
+      "entities": []
+    },
+    {
+      "text": "menu sexta",
+      "intent": "MenuDiario",
+      "entities": []
+    },
+    {
+      "text": "menu terça",
+      "intent": "MenuDiario",
+      "entities": []
+    },
+    {
+      "text": "qual o menu da semana",
+      "intent": "MenuSemanal",
+      "entities": []
+    }
+  ],
+  "settings": []
+}

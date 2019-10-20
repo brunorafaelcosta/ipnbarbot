@@ -58,6 +58,9 @@ namespace ipnbarbot
 
             // Create the Conversation state. (Used by the Dialog system itself.)
             services.AddSingleton<ConversationState>();
+
+            // Register LUIS recognizer
+            services.AddSingleton<Recognizers.MenuRecognizer>();
             
             // The MainDialog that will be run by the bot.
             services.AddSingleton<Dialogs.MenuDialog>();
