@@ -1,0 +1,84 @@
+﻿using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
+using System.IO;
+using Serilog;
+using System;
+using ipnbarbot.Infrastructure.Utils.Mvc.Extensions;
+using ipnbarbot.Data;
+
+namespace ipnbarbot
+{
+    public class Program
+    {
+        public static readonly string Namespace = typeof(Program).Namespace;
+        public static readonly string AppName = Namespace.Contains('.') ? Namespace.Substring(Namespace.LastIndexOf('.', Namespace.LastIndexOf('.') - 1) + 1) : Namespace;
+
+        public static void Main(string[] args)
+        {
+            var configuration = GetConfiguration();
+
+            Log.Logger = CreateSerilogLogger(configuration);
+
+            try
+            {
+                Log.Information("Configuring web host ({ApplicationContext})...", AppName);
+                var host = BuildWebHost(configuration, args);
+                
+                Log.Information("Applying migrations ({ApplicationContext})...", AppName);
+                host.MigrateDbContext<ApplicationDbContext>((context, services) =>
+                {
+                    var env = services.GetService<IHostingEnvironment>();
+                    var logger = services.GetService<ILogger<ApplicationDbContextSeed>>();
+
+                    new ApplicationDbContextSeed()
+                        .SeedAsync(context, env, logger)
+                        .Wait();
+                });
+
+                Log.Information("Starting web host ({ApplicationContext})...", AppName);
+                host.Run();
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Program terminated unexpectedly ({ApplicationContext})!", AppName);
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
+        }
+
+        private static IWebHost BuildWebHost(IConfiguration configuration, string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .CaptureStartupErrors(false)
+                .UseStartup<Startup>()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseConfiguration(configuration)
+                .UseSerilog()
+                .Build();
+        
+        private static IConfiguration GetConfiguration()
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddEnvironmentVariables();
+
+            var config = builder.Build();
+
+            return builder.Build();
+        }
+
+        private static Serilog.ILogger CreateSerilogLogger(IConfiguration configuration)
+        {
+            return new LoggerConfiguration()
+                .ReadFrom.Configuration(configuration)
+                .Enrich.WithProperty("ApplicationContext", AppName)
+                .CreateLogger();
+        }
+    }
+}
