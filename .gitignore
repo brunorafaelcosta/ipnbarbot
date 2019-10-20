@@ -26,6 +26,8 @@ bld/
 .vscode
 AppData
 appsettings.Development.json
+deploy.sh
+.deployment
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/

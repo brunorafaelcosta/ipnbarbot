@@ -36,7 +36,7 @@
 
   <ItemGroup>
       <None Update="tessdata/*">
-          <CopyToOutputDirectory>ACTION_TYPE</CopyToOutputDirectory>
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
   </ItemGroup>
 
