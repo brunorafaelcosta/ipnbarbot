@@ -2,9 +2,13 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 using System.IO;
 using Serilog;
 using System;
+using ipnbarbot.Infrastructure.Utils.Mvc.Extensions;
+using ipnbarbot.Data;
 
 namespace ipnbarbot
 {
@@ -24,6 +28,17 @@ namespace ipnbarbot
                 Log.Information("Configuring web host ({ApplicationContext})...", AppName);
                 var host = BuildWebHost(configuration, args);
                 
+                Log.Information("Applying migrations ({ApplicationContext})...", AppName);
+                host.MigrateDbContext<ApplicationDbContext>((context, services) =>
+                {
+                    var env = services.GetService<IHostingEnvironment>();
+                    var logger = services.GetService<ILogger<ApplicationDbContextSeed>>();
+
+                    new ApplicationDbContextSeed()
+                        .SeedAsync(context, env, logger)
+                        .Wait();
+                });
+
                 Log.Information("Starting web host ({ApplicationContext})...", AppName);
                 host.Run();
             }

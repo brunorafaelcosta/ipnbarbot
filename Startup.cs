@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ipnbarbot.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -31,6 +33,15 @@ namespace ipnbarbot
                 {
                     jsonOptions.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
                 });
+            
+            #region DbContext
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            #endregion DbContext
+        
+            #region Applications
+            services.AddTransient<Application.IMealSchedulesApp, Application.MealSchedulesApp>();
+            #endregion Applications
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
